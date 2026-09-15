@@ -3,7 +3,7 @@ import CommentContext from "./context/CreatContext";
 import CommentCard from "./components/CommentCard";
 import { permissionHOC } from "../../permisionHOC/permisionHOC";
 import { paginationHOC } from "../../permisionHOC/paginationHOC";
-import PaginationButton from "../posts/pagination/PaginationButton";
+import PaginationButton from "../../component/PaginationButton";
 
 const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
   const { comments, handleSearch } = useContext(CommentContext);
@@ -11,7 +11,7 @@ const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
     comment.name.toLowerCase().includes(comments.search.toLowerCase()),
   );
   return (
-    <section className="min-h-screen bg-gray-100 dark:bg-gray-950 p-4 md:p-6">
+    <section className="min-h-screen bg-gray-100 dark:bg-transparent p-4 md:p-6">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">

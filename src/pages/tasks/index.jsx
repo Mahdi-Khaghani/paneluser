@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import taskContext from "./context/creatContext";
 import TaskCard from "./components/TaskCard";
 import { permissionHOC } from "../../permisionHOC/permisionHOC";
-import PaginationButton from "../posts/pagination/PaginationButton";
+import PaginationButton from "../../component/PaginationButton";
 import { paginationHOC } from "../../permisionHOC/paginationHOC";
 
 const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
@@ -21,7 +21,7 @@ const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
     return searchMatch && statusMatch;
   });
   return (
-    <section className="min-h-screen bg-gray-100 p-4 dark:bg-gray-950 md:p-6">
+    <section className="min-h-screen bg-gray-100 p-4 dark:bg-transparent md:p-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
           تسک‌ها

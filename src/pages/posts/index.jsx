@@ -4,7 +4,7 @@ import PostTable from "./components/PostTable";
 import PostContext from "./context/CreatContext";
 import AddPost from "./Add-Post/AddPost";
 import { permissionHOC } from "../../permisionHOC/permisionHOC";
-import PaginationButton from "./pagination/PaginationButton";
+import PaginationButton from "../../component/PaginationButton";
 import { paginationHOC } from "../../permisionHOC/paginationHOC";
 
 const Posts = ({ Pagination, setCurrentPage, currentPage , pages}) => {
