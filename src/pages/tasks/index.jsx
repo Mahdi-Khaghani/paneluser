@@ -2,11 +2,13 @@ import { useContext, useState } from "react";
 import taskContext from "./context/creatContext";
 import TaskCard from "./components/TaskCard";
 import { permissionHOC } from "../../permisionHOC/permisionHOC";
+import PaginationButton from "../posts/pagination/PaginationButton";
+import { paginationHOC } from "../../permisionHOC/paginationHOC";
 
-const Tasks = () => {
+const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
   const [status, setStatus] = useState("all");
   const { tasks, handleSearch } = useContext(taskContext);
-  const filterTask = tasks.data?.filter((task) => {
+  const filterTask = Pagination.filter((task) => {
     const searchMatch = task.title
       .toLowerCase()
       .includes(tasks.search.toLowerCase());
@@ -52,8 +54,22 @@ const Tasks = () => {
           <TaskCard task={task} key={task.id} />
         ))}
       </div>
+      <div className="flex items-center justify-center gap-2 mt-6" dir="ltr">
+        {pages.map((page) => (
+          <PaginationButton
+            page={page}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        ))}
+      </div>
     </section>
   );
 };
 
-export default permissionHOC(Tasks, taskContext , "tasks" , "handleGetTask");
+export default permissionHOC(
+  paginationHOC(Tasks, taskContext, "tasks"),
+  taskContext,
+  "tasks",
+  "handleGetTask"
+);

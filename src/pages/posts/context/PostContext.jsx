@@ -11,17 +11,17 @@ const initialState = {
   data: null,
   loading: true,
   error: false,
-  search : ""
+  search: "",
 };
 
 const postReduserAction = (state, action) => {
   switch (action.type) {
     case "FETCH_START":
-      return {...state , data: null, loading: true, error: false };
+      return { ...state, data: null, loading: true, error: false };
     case "FETCH_SUCCESSFULL":
-      return {...state , data: action.payload, loading: false, error: false };
+      return { ...state, data: action.payload, loading: false, error: false };
     case "FETCH_ERROR":
-      return {...state , data: null, loading: false, error: true };
+      return { ...state, data: null, loading: false, error: true };
     case "DELETED_POST":
       return {
         ...state,
@@ -42,7 +42,7 @@ const postReduserAction = (state, action) => {
     case "SEARCH_POST":
       return {
         ...state,
-        search : action.payload
+        search: action.payload,
       };
     default:
       return state;
@@ -51,6 +51,7 @@ const postReduserAction = (state, action) => {
 
 const PostContextProvider = ({ children }) => {
   const [post, dispatch] = useReducer(postReduserAction, initialState);
+
   const handleGetPosts = async () => {
     try {
       dispatch({ type: "FETCH_START" });

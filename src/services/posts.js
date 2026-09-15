@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getPostsServices = async () => {
   const response = await axios.get(
-    "https://jsonplaceholder.typicode.com/posts",
+    "https://jsonplaceholder.typicode.com/posts?_limit=100",
   );
   return response.data;
 };

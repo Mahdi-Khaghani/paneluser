@@ -2,12 +2,14 @@ import { useContext } from "react";
 import CommentContext from "./context/CreatContext";
 import CommentCard from "./components/CommentCard";
 import { permissionHOC } from "../../permisionHOC/permisionHOC";
+import { paginationHOC } from "../../permisionHOC/paginationHOC";
+import PaginationButton from "../posts/pagination/PaginationButton";
 
-const Comments = () => {
-  const { comments  , handleSearch} = useContext(CommentContext);
-  const filterComment = comments.data?.filter((comment) => 
-    comment.name.toLowerCase().includes(comments.search.toLowerCase())
-  )
+const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
+  const { comments, handleSearch } = useContext(CommentContext);
+  const filterComment = Pagination.filter((comment) =>
+    comment.name.toLowerCase().includes(comments.search.toLowerCase()),
+  );
   return (
     <section className="min-h-screen bg-gray-100 dark:bg-gray-950 p-4 md:p-6">
       {/* Header */}
@@ -24,7 +26,7 @@ const Comments = () => {
       {/* Search */}
       <div className="mb-6">
         <input
-        onChange={(e) => handleSearch(e)}
+          onChange={(e) => handleSearch(e)}
           type="text"
           placeholder="Search comments..."
           className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-gray-800 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500"
@@ -33,13 +35,25 @@ const Comments = () => {
 
       {/* Comments */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {
-          filterComment?.map((comment) => (
-            <CommentCard comment={comment} key={comment.id} />
-          ))}
+        {filterComment?.map((comment) => (
+          <CommentCard comment={comment} key={comment.id} />
+        ))}
+      </div>
+      <div className="flex items-center justify-center gap-2 mt-6" dir="ltr">
+        {pages.map((page) => (
+          <PaginationButton
+            page={page}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        ))}
       </div>
     </section>
   );
 };
-
-export default permissionHOC(Comments,CommentContext,"comments","handleGetComments");
+export default permissionHOC(
+  paginationHOC(Comments, CommentContext, "comments"),
+  CommentContext,
+  "comments",
+  "handleGetComments",
+);

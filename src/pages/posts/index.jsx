@@ -4,11 +4,13 @@ import PostTable from "./components/PostTable";
 import PostContext from "./context/CreatContext";
 import AddPost from "./Add-Post/AddPost";
 import { permissionHOC } from "../../permisionHOC/permisionHOC";
+import PaginationButton from "./pagination/PaginationButton";
+import { paginationHOC } from "../../permisionHOC/paginationHOC";
 
-const Posts = () => {
+const Posts = ({ Pagination, setCurrentPage, currentPage , pages}) => {
   const { post } = useContext(PostContext);
   const [showModal, setShowModal] = useState(false);
-  const filteredPosts = post.data?.filter((item) =>
+  const filteredPosts = Pagination.filter((item) =>
     item.title.toLowerCase().includes(post.search.toLowerCase()),
   );
   return (
@@ -36,10 +38,24 @@ const Posts = () => {
           <PostTable key={post.id} post={post} />
         ))}
       </div>
+      <div className="flex items-center justify-center gap-2 mt-6" dir="ltr">
+        {pages.map((page) => (
+          <PaginationButton
+            page={page}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        ))}
+      </div>
 
       {showModal && <AddPost onClose={setShowModal} showModal={showModal} />}
     </div>
   );
 };
 
-export default permissionHOC(Posts,PostContext,"post","handleGetPosts");
+export default permissionHOC(
+  paginationHOC(Posts, PostContext, "post"),
+  PostContext,
+  "post",
+  "handleGetPosts"
+);
