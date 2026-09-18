@@ -9,9 +9,9 @@ const UpdatePost = ({ showModal, onClose, post }) => {
     title: title,
     body: body,
   };
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
-    handleUpdatePosts(post.id, updatedPost);
+    await handleUpdatePosts(post.id, updatedPost);
     window.alert("post successfully changed.");
     console.log(updatedPost);
     onClose();

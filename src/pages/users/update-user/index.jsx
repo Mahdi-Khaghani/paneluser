@@ -16,9 +16,9 @@ const EditUserModal = ({ user, setSelectedUser}) => {
     phone : phone,
     website : website
   }
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
-   handleUpdateUser(user.id,updatedUser)
+    await handleUpdateUser(user.id,updatedUser)
     setSelectedUser(null)
   }
   return (

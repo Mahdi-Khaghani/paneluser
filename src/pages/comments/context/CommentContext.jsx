@@ -45,8 +45,8 @@ const CommentContextProvider = ({ children }) => {
   };
   const handleDeleteComments = async(id) => {
     try{
-      dispatch({type : "COMMENT_DELETED" , payload : id})
       await deleteCommentsServices(id);
+      dispatch({type : "COMMENT_DELETED" , payload : id})
     }catch(error){
       console.log(error)
     }

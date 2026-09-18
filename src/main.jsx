@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router";
 import UserContextProvider from "./pages/users/context/UserContext.jsx";
 import PostContextProvider from "./pages/posts/context/PostContext.jsx";
 import CommentContextProvider from "./pages/comments/context/CommentContext.jsx";
-import TaskContextProvider from "./pages/tasks/context/taskContext.jsx";
+import TaskContextProvider from "./pages/tasks/context/TaskContext.jsx";
 
 createRoot(document.getElementById("root")).render(
 

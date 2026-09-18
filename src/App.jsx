@@ -1,6 +1,6 @@
-import Content from "./layout/Content";
-import Header from "./layout/header";
-import Sidebar from "./layout/sidebar";
+import Content from "./layout/content/index";
+import Header from "./layout/header/index";
+import Sidebar from "./layout/sidebar/index";
 
 function App() {
   return (

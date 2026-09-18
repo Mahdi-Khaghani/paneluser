@@ -1,7 +1,7 @@
 import { FaUserPlus } from "react-icons/fa";
 import UsersTable from "./_components/UsersTable";
 import { Link } from "react-router";
-import { permissionHOC } from "../../permisionHOC/permisionHOC";
+import { withFetchStateHOC } from "../../hoc/withFetchStateHOC";
 import UserContext from "./context/CreatContext";
 
 
@@ -24,4 +24,4 @@ const Users = () => {
   );
 };
 
-export default permissionHOC(Users,UserContext,"state","handleGetUsers") ;
+export default withFetchStateHOC(Users,UserContext,"state","handleGetUsers") ;

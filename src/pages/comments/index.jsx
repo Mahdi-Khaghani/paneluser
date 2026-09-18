@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import CommentContext from "./context/CreatContext";
 import CommentCard from "./components/CommentCard";
-import { permissionHOC } from "../../permisionHOC/permisionHOC";
-import { paginationHOC } from "../../permisionHOC/paginationHOC";
+import { withFetchStateHOC } from "../../hoc/withFetchStateHOC";
+import { paginationHOC } from "../../hoc/paginationHOC";
 import PaginationButton from "../../component/PaginationButton";
 
 const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
@@ -51,7 +51,7 @@ const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
     </section>
   );
 };
-export default permissionHOC(
+export default withFetchStateHOC(
   paginationHOC(Comments, CommentContext, "comments"),
   CommentContext,
   "comments",

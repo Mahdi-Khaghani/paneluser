@@ -3,7 +3,7 @@ import ErrorComponent from "../component/ErrorComponent"
 import LoadingComponent from "../component/LoadingComponent"
 
 
-export const permissionHOC = (WrappedComponent,context,dataKey,reTrykey) => {
+export const withFetchStateHOC = (WrappedComponent,context,dataKey,reTrykey) => {
     const NewComponent = (props) => {
         const contextData = useContext(context)
         const data = contextData[dataKey]

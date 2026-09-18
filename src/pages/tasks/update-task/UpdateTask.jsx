@@ -11,9 +11,9 @@ const UpdateTask = ({ reTry, task }) => {
     title: title,
     completed: completed,
   };
-  const handleSubmit = (e) => {
-    e.preventDefault;
-    handleUpdateTask(task.id, updatedTask);
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    await handleUpdateTask(task.id, updatedTask);
     window.alert("Task Updated SuccessFully");
     console.log(updatedTask);
     reTry();

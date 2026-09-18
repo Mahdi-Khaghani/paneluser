@@ -3,9 +3,9 @@ import HeaderPosts from "./components/HeaderPosts";
 import PostTable from "./components/PostTable";
 import PostContext from "./context/CreatContext";
 import AddPost from "./Add-Post/AddPost";
-import { permissionHOC } from "../../permisionHOC/permisionHOC";
+import { withFetchStateHOC } from "../../hoc/withFetchStateHOC";
 import PaginationButton from "../../component/PaginationButton";
-import { paginationHOC } from "../../permisionHOC/paginationHOC";
+import { paginationHOC } from "../../hoc/paginationHOC";
 
 const Posts = ({ Pagination, setCurrentPage, currentPage , pages}) => {
   const { post } = useContext(PostContext);
@@ -53,7 +53,7 @@ const Posts = ({ Pagination, setCurrentPage, currentPage , pages}) => {
   );
 };
 
-export default permissionHOC(
+export default withFetchStateHOC(
   paginationHOC(Posts, PostContext, "post"),
   PostContext,
   "post",

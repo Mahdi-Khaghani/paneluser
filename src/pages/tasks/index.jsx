@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import taskContext from "./context/creatContext";
 import TaskCard from "./components/TaskCard";
-import { permissionHOC } from "../../permisionHOC/permisionHOC";
+import { paginationHOC } from "../../hoc/paginationHOC";
 import PaginationButton from "../../component/PaginationButton";
-import { paginationHOC } from "../../permisionHOC/paginationHOC";
+import { withFetchStateHOC } from "../../hoc//withFetchStateHOC";
 
 const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
   const [status, setStatus] = useState("all");
@@ -67,7 +67,7 @@ const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
   );
 };
 
-export default permissionHOC(
+export default withFetchStateHOC(
   paginationHOC(Tasks, taskContext, "tasks"),
   taskContext,
   "tasks",
