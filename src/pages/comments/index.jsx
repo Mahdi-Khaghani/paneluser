@@ -6,10 +6,7 @@ import { paginationHOC } from "../../hoc/paginationHOC";
 import PaginationButton from "../../component/PaginationButton";
 
 const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
-  const { comments, handleSearch } = useContext(CommentContext);
-  const filterComment = Pagination.filter((comment) =>
-    comment.name.toLowerCase().includes(comments.search.toLowerCase()),
-  );
+  const { handleSearch } = useContext(CommentContext);
   return (
     <section className="min-h-screen bg-gray-100 dark:bg-transparent p-4 md:p-6">
       {/* Header */}
@@ -35,7 +32,7 @@ const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
 
       {/* Comments */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {filterComment?.map((comment) => (
+        {Pagination.map((comment) => (
           <CommentCard comment={comment} key={comment.id} />
         ))}
       </div>
@@ -52,7 +49,7 @@ const Comments = ({ Pagination, setCurrentPage, currentPage, pages }) => {
   );
 };
 export default withFetchStateHOC(
-  paginationHOC(Comments, CommentContext, "comments"),
+  paginationHOC(Comments, CommentContext, "comments", "name"),
   CommentContext,
   "comments",
   "handleGetComments",

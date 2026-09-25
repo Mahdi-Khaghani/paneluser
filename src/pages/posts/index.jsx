@@ -54,7 +54,7 @@ const Posts = ({ Pagination, setCurrentPage, currentPage , pages}) => {
 };
 
 export default withFetchStateHOC(
-  paginationHOC(Posts, PostContext, "post"),
+  paginationHOC(Posts, PostContext, "post","title"),
   PostContext,
   "post",
   "handleGetPosts"

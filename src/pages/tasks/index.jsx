@@ -1,25 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import taskContext from "./context/creatContext";
 import TaskCard from "./components/TaskCard";
-import { paginationHOC } from "../../hoc/paginationHOC";
 import PaginationButton from "../../component/PaginationButton";
 import { withFetchStateHOC } from "../../hoc//withFetchStateHOC";
+import { taskPagiantionHOC } from "../../hoc/taskPaginationHOC";
 
-const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
-  const [status, setStatus] = useState("all");
-  const { tasks, handleSearch } = useContext(taskContext);
-  const filterTask = Pagination.filter((task) => {
-    const searchMatch = task.title
-      .toLowerCase()
-      .includes(tasks.search.toLowerCase());
+const Tasks = ({
+  Pagination,
+  setCurrentPage,
+  currentPage,
+  setStatus,
+  pages,
+}) => {
+  const { handleSearch } = useContext(taskContext);
 
-    const statusMatch =
-      status === "all" ||
-      (status === "completed" && task.completed) ||
-      (status === "pending" && !task.completed);
-
-    return searchMatch && statusMatch;
-  });
   return (
     <section className="min-h-screen bg-gray-100 p-4 dark:bg-transparent md:p-6">
       <div className="mb-6">
@@ -50,7 +44,7 @@ const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
         </select>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {filterTask.map((task) => (
+        {Pagination.map((task) => (
           <TaskCard task={task} key={task.id} />
         ))}
       </div>
@@ -68,8 +62,8 @@ const Tasks = ({ Pagination, setCurrentPage, currentPage, pages }) => {
 };
 
 export default withFetchStateHOC(
-  paginationHOC(Tasks, taskContext, "tasks"),
+  taskPagiantionHOC(Tasks),
   taskContext,
   "tasks",
-  "handleGetTask"
+  "handleGetTask",
 );
